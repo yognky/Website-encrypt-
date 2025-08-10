@@ -1,0 +1,148 @@
+<html><head>
+    <title>HTML ENCRYPTOR TOOL</title>
+    <style>
+        body {
+            font-family: monospace;
+            background-color: #000;
+            color: #ff0000;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #ff0000;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            text-shadow: 0 0 5px #ff0000;
+        }
+        
+        h2 {
+            color: #ff0000;
+            margin: 15px 0 5px 0;
+            font-size: 1.2rem;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 200px;
+            background-color: #111;
+            color: #ff5555;
+            border: 1px solid #ff0000;
+            padding: 10px;
+            font-family: monospace;
+            margin: 5px 0 15px 0;
+        }
+        
+        button {
+            background: #300000;
+            color: #ff0000;
+            border: 1px solid #ff0000;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-family: monospace;
+            margin: 5px 0;
+            width: 100%;
+        }
+        
+        button:hover {
+            background: #500000;
+            text-shadow: 0 0 3px #ff0000;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #ff0000;
+            font-size: 0.9rem;
+        }
+        
+        .whatsapp-btn {
+            display: block;
+            text-align: center;
+            margin: 20px auto;
+            padding: 8px;
+            background: #300000;
+            color: #ff0000;
+            text-decoration: none;
+            border: 1px solid #ff0000;
+            width: 80%;
+            font-family: monospace;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .button-group button {
+            flex: 1;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body>
+    <h1>HTML ENCRYPTOR TOOL</h1>
+    
+    <h2>INPUT HTML CODE:</h2>
+    <textarea id="originalHtml" placeholder="PASTE HTML HERE..."></textarea>
+    
+    <button onclick="encryptHtml()">[ ENCRYPTED START ]</button>
+    
+    <h2>ENCRYPTED OUTPUT:</h2>
+    <textarea id="encryptedHtml" readonly=""></textarea>
+    
+    <div class="button-group">
+        <button onclick="copyEncrypted()">[ COPY CODE ]</button>
+        <button onclick="downloadZip()">[ DOWNLOAD ZIP FILE ]</button>
+    </div>
+    
+    <a href="https://whatsapp.com/channel/0029Vb6l4NmDZ4LSjRRLFP0f" class="whatsapp-btn">
+        [ JOIN MY CH ]
+    </a>
+    
+    <div class="footer">
+        DEVELOPED BY YONGKY
+    </div>
+
+    <script>
+        function encryptHtml() {
+            const original = document.getElementById('originalHtml').value;
+            if (!original.trim()) {
+                alert('[!] INPUT CODE REQUIRED [!]');
+                return;
+            }
+
+            let encrypted = original
+                .replace(/</g, '~lt;')
+                .replace(/>/g, '~gt;')
+                .replace(/\n/g, '~nl;')
+                .replace(/"/g, '~quot;')
+                .replace(/'/g, '~apos;');
+
+            encrypted = <!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function decodeHtml() {
+            let code = "${btoa(encrypted)}";
+            code = atob(code);
+            code = code.replace(/~lt;/g, '<')
+                      .replace(/~gt;/g, '>')
+                      .replace(/~nl;/g, '\\n')
+                      .replace(/~quot;/g, '"')
+                      .replace(/~apos;/g, "'");
+            document.open();
+            document.write(code);
+            document.close();
+        }
+    <\/script>
+</head>
+<body onload="decodeHtml()">
+    Loading...
+</body>
+</html>;
+
+            document.getElementById('encryptedHtml').value = encrypted;
+        }</script></body></html>
