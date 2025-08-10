@@ -1,4 +1,5 @@
-<html><head>
+<html>
+<head>
     <title>HTML ENCRYPTOR TOOL</title>
     <style>
         body {
@@ -91,7 +92,7 @@
     <button onclick="encryptHtml()">[ ENCRYPTED START ]</button>
     
     <h2>ENCRYPTED OUTPUT:</h2>
-    <textarea id="encryptedHtml" readonly=""></textarea>
+    <textarea id="encryptedHtml" readonly></textarea>
     
     <div class="button-group">
         <button onclick="copyEncrypted()">[ COPY CODE ]</button>
@@ -121,13 +122,14 @@
                 .replace(/"/g, '~quot;')
                 .replace(/'/g, '~apos;');
 
-            encrypted = <!DOCTYPE html>
+            const encoded = btoa(encrypted);
+
+            encrypted = `<!DOCTYPE html>
 <html>
 <head>
     <script>
         function decodeHtml() {
-            let code = "${btoa(encrypted)}";
-            code = atob(code);
+            let code = atob("${encoded}");
             code = code.replace(/~lt;/g, '<')
                       .replace(/~gt;/g, '>')
                       .replace(/~nl;/g, '\\n')
@@ -142,7 +144,10 @@
 <body onload="decodeHtml()">
     Loading...
 </body>
-</html>;
+</html>`;
 
             document.getElementById('encryptedHtml').value = encrypted;
-        }</script></body></html>
+        }
+    </script>
+</body>
+</html>
