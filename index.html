@@ -9,7 +9,6 @@
             margin: 0 auto;
             padding: 20px;
         }
-        
         h1 {
             color: #ff0000;
             text-align: center;
@@ -17,13 +16,11 @@
             font-size: 1.8rem;
             text-shadow: 0 0 5px #ff0000;
         }
-        
         h2 {
             color: #ff0000;
             margin: 15px 0 5px 0;
             font-size: 1.2rem;
         }
-        
         textarea {
             width: 100%;
             height: 200px;
@@ -34,7 +31,6 @@
             font-family: monospace;
             margin: 5px 0 15px 0;
         }
-        
         button {
             background: #300000;
             color: #ff0000;
@@ -45,19 +41,16 @@
             margin: 5px 0;
             width: 100%;
         }
-        
         button:hover {
             background: #500000;
             text-shadow: 0 0 3px #ff0000;
         }
-        
         .footer {
             text-align: center;
             margin-top: 30px;
             color: #ff0000;
             font-size: 0.9rem;
         }
-        
         .whatsapp-btn {
             display: block;
             text-align: center;
@@ -70,12 +63,10 @@
             width: 80%;
             font-family: monospace;
         }
-        
         .button-group {
             display: flex;
             gap: 10px;
         }
-        
         .button-group button {
             flex: 1;
         }
@@ -126,6 +117,7 @@
             encrypted = `<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <script>
         function decodeHtml() {
             let code = atob("${encoded}");
@@ -146,6 +138,33 @@
 </html>`;
 
             document.getElementById('encryptedHtml').value = encrypted;
+        }
+
+        function copyEncrypted() {
+            const text = document.getElementById('encryptedHtml').value;
+            if (!text.trim()) {
+                alert('[!] NO ENCRYPTED CODE TO COPY [!]');
+                return;
+            }
+            navigator.clipboard.writeText(text)
+                .then(() => alert('[+] CODE COPIED TO CLIPBOARD [+]'))
+                .catch(() => alert('[!] FAILED TO COPY [!]'));
+        }
+
+        function downloadZip() {
+            const content = document.getElementById('encryptedHtml').value;
+            if (!content.trim()) {
+                alert('[!] NO ENCRYPTED CODE TO DOWNLOAD [!]');
+                return;
+            }
+            const zip = new JSZip();
+            zip.file("encrypted.html", content);
+            zip.generateAsync({ type: "blob" }).then(function(blob) {
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(blob);
+                link.download = "encrypted.zip";
+                link.click();
+            });
         }
     </script>
 </body></html>
